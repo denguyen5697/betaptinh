@@ -1,0 +1,82 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title BÉ TẬP TÍNH
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/default.css')
+    script(type='text/javascript').
+      function getNum1(){
+        return document.getElementById('num1').value;
+      }
+
+      function getNum2(){
+        return document.getElementById('num2').value;
+      }
+      
+      function isNumber(value){
+        return !isNaN(parseFloat(value)) && isFinite(value);
+      }
+
+      function changeAnnouncement1(announce){
+        document.getElementById('announce1').innerHTML = announce;
+      }
+
+      function changeAnnouncement2(announce){
+        document.getElementById('announce2').innerHTML = announce;
+      }
+
+      function checkInput1(){
+        if (!isNumber(getNum1())){
+            changeAnnouncement1("Giá trị ở ô Số thứ nhất không phải là số.");
+        }
+      }
+
+      function checkInput2(){
+        if (!isNumber(getNum2())){
+            changeAnnouncement1("Giá trị ở ô Số thứ hai không phải là số.");
+        }
+      }
+  body
+    .wrapper
+      .row.header
+        h2.col-md-12 Bé tập tính
+      .program
+        form(name='ntr', method='POST')
+          .row
+            .col-md-1.title Số thứ nhất
+            .col-md-2.input
+              input#num1(type='text', size='20',name='num_1', onblur='checkInput1()', value=value1)
+            .col-md-2
+              label
+                input(type='radio', name='radioButton', value='add')
+                | Cộng
+              label
+                input(type='radio', name='radioButton', value='substract')
+                | Trừ
+          .row
+            .col-md-1.title Số thứ hai
+            .col-md-2.input
+              input#num2(type='text', size='20',name='num_2', onblur='checkInput2()', value=value2)
+            .col-md-2
+              label
+                input(type='radio', name='radioButton', value='multiply')
+                | Nhân
+              label
+                input(type='radio', name='radioButton', value='divide')
+                | Chia
+          .row
+            .col-md-1.title Kết quả
+            .col-md-2
+              input(type='text', size='20', disabled='disabled',value=result)
+            .col-md-2
+              input(type='submit', name='calculate', value='Tính')
+          .row
+            span.col-md-1.title Thông báo
+            span#announce1.col-md-5=noti1
+          .row
+            span.col-md-1  
+            span#announce2.col-md-4=noti2
